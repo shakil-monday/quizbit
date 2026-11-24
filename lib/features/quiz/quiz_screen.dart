@@ -137,20 +137,24 @@ class _QuizScreenState extends State<QuizScreen> {
                 SizedBox(height: 20),
 
                 optionTile(
+                  context: context,
                   optionText: "1. Cittagong",
                   background: Colors.deepOrange.shade200,
                 ),
                 optionTile(
+                  context: context,
                   optionText: "2. Dhaka",
                   background: Colors.amber.shade200,
                   borderColor: Colors.redAccent,
                   showLock: true,
                 ),
                 optionTile(
+                  context: context,
                   optionText: "3. Sylhet",
                   background: Colors.deepOrange.shade200,
                 ),
                 optionTile(
+                  context: context,
                   optionText: "4. Barisal",
                   background: Colors.deepOrange.shade200,
                 ),
