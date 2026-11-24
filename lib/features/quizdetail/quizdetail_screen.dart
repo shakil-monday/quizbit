@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizbit/features/quiz/quiz_screen.dart';
 import 'package:quizbit/widgets/chip.dart';
 import 'package:quizbit/widgets/quiz_item.dart';
 import 'package:quizbit/widgets/ratingitem.dart';
@@ -100,96 +101,6 @@ class _QuizDetailScreenState extends State<QuizDetailScreen> {
                   ),
                 ],
               ),
-
-              // Stack(
-              //   children: [
-              //     Container(
-              //       decoration: BoxDecoration(
-              //         image: DecorationImage(
-              //           fit: BoxFit.cover,
-              //           image: NetworkImage(
-              //             "https://images.unsplash.com/photo-1778918027232-ee2527f92946?w=1920&h=1080&fit=crop&q=80",
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-
-              //     Positioned(
-              //       child: Container(
-              //         decoration: BoxDecoration(
-              //           gradient: LinearGradient(
-              //             begin: Alignment.topCenter,
-              //             end: Alignment.bottomCenter,
-              //             colors: [Colors.transparent, Colors.black87],
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-
-              // Padding(
-              //   padding: EdgeInsets.only(top: 50, left: 12, right: 12),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     children: [
-              //       Container(
-              //         padding: EdgeInsets.symmetric(
-              //           horizontal: 10,
-              //           vertical: 4,
-              //         ),
-              //         decoration: BoxDecoration(
-              //           color: Colors.white,
-              //           borderRadius: BorderRadius.circular(20),
-              //         ),
-              //         child: Text(
-              //           "MEDIUM",
-              //           style: TextStyle(
-              //             fontSize: 12,
-              //             fontWeight: FontWeight.bold,
-              //           ),
-              //         ),
-              //       ),
-              //       Text(
-              //         "Launched 1 month ago",
-              //         style: TextStyle(color: Colors.white),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-
-              //     Positioned(
-              //       bottom: 12,
-              //       left: 12,
-              //       child: Column(
-              //         crossAxisAlignment: CrossAxisAlignment.start,
-              //         children: [
-              //           Text(
-              //             "Incredible Kashmir",
-              //             style: TextStyle(
-              //               fontSize: 28,
-              //               fontWeight: FontWeight.bold,
-              //               color: Colors.white,
-              //             ),
-              //           ),
-              //           Row(
-              //             children: [
-              //               Icon(Icons.people, size: 25, color: Colors.white),
-              //               SizedBox(width: 10),
-              //               Text(
-              //                 "4,567 People Played This",
-              //                 style: TextStyle(
-              //                   fontSize: 18,
-              //                   fontWeight: FontWeight.w600,
-              //                   color: Colors.white,
-              //                 ),
-              //               ),
-              //             ],
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // title: Text('SliverAppBar'),
             ),
           ),
 
@@ -419,7 +330,10 @@ class _QuizDetailScreenState extends State<QuizDetailScreen> {
               ),
             ),
             onPressed: () {
-              print("Clicked on quiz start button");
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => QuizScreen()),
+              );
             },
             child: Text(
               "START",
