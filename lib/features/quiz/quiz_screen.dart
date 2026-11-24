@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizbit/widgets/optionTile.dart';
+import 'package:quizbit/widgets/quiz_drawer.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -12,8 +13,9 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: QuizDrawer(),
       appBar: AppBar(
-        leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
+        // leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
         centerTitle: true,
         title: Text("BDT 25,000"),
       ),
