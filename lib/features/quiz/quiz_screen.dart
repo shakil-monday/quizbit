@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizbit/features/leaderboard/leaderboard_screen.dart';
 import 'package:quizbit/widgets/optionTile.dart';
 import 'package:quizbit/widgets/quiz_drawer.dart';
 
@@ -169,7 +170,10 @@ class _QuizScreenState extends State<QuizScreen> {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
-              print("Click on submit quize button");
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LeaderboardScreen()),
+              );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.deepOrangeAccent,
