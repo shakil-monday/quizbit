@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:quizbit/features/leaderboard/leaderboard_screen.dart';
+import 'package:quizbit/features/quiz/questionModel.dart';
 import 'package:quizbit/widgets/optionTile.dart';
 import 'package:quizbit/widgets/quiz_drawer.dart';
 
 class QuizScreen extends StatefulWidget {
-  const QuizScreen({super.key});
+  Questionmodel questionModel;
+
+  QuizScreen({super.key, required this.questionModel});
 
   @override
   State<QuizScreen> createState() => _QuizScreenState();
@@ -13,12 +16,14 @@ class QuizScreen extends StatefulWidget {
 class _QuizScreenState extends State<QuizScreen> {
   @override
   Widget build(BuildContext context) {
+    final questionModel = widget.questionModel;
+
     return Scaffold(
       drawer: QuizDrawer(),
       appBar: AppBar(
         // leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
         centerTitle: true,
-        title: Text("BDT 25,000"),
+        title: Text("BDT ${questionModel.questionMoney}"),
       ),
       body: SafeArea(
         child: Column(
@@ -40,7 +45,8 @@ class _QuizScreenState extends State<QuizScreen> {
                           bottomRight: Radius.circular(8),
                         ),
                         child: Image.network(
-                          "https://images.unsplash.com/photo-1778918027232-ee2527f92946?w=1920&h=1080&fit=crop&q=80",
+                          // "https://images.unsplash.com/photo-1778918027232-ee2527f92946?w=1920&h=1080&fit=crop&q=80",
+                          questionModel.questionImageUrl!,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -130,7 +136,7 @@ class _QuizScreenState extends State<QuizScreen> {
                     border: Border.all(color: Colors.redAccent.shade200),
                   ),
                   child: Text(
-                    "What is the capital of Bangladesh?",
+                    questionModel.question,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                   ),
@@ -139,24 +145,24 @@ class _QuizScreenState extends State<QuizScreen> {
 
                 optionTile(
                   context: context,
-                  optionText: "1. Cittagong",
+                  optionText: "1. ${questionModel.option1}",
                   background: Colors.deepOrange.shade200,
                 ),
                 optionTile(
                   context: context,
-                  optionText: "2. Dhaka",
+                  optionText: "2. ${questionModel.option2}",
                   background: Colors.amber.shade200,
                   borderColor: Colors.redAccent,
                   showLock: true,
                 ),
                 optionTile(
                   context: context,
-                  optionText: "3. Sylhet",
+                  optionText: "3. ${questionModel.option3}",
                   background: Colors.deepOrange.shade200,
                 ),
                 optionTile(
                   context: context,
-                  optionText: "4. Barisal",
+                  optionText: "4. ${questionModel.option4}",
                   background: Colors.deepOrange.shade200,
                 ),
               ],

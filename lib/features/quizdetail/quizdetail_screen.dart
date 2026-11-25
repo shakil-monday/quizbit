@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:quizbit/features/quiz/questionModel.dart';
+import 'package:quizbit/model/quizModel.dart';
 import 'package:quizbit/features/quiz/quiz_screen.dart';
 import 'package:quizbit/widgets/chip.dart';
 import 'package:quizbit/widgets/quiz_item.dart';
 import 'package:quizbit/widgets/ratingitem.dart';
 
 class QuizDetailScreen extends StatefulWidget {
-  const new({super.key});
+  QuizModel quizModel;
+  QuizDetailScreen({super.key, required this.quizModel});
 
   @override
   State<QuizDetailScreen> createState() => _QuizDetailScreenState();
@@ -34,7 +37,14 @@ class _QuizDetailScreenState extends State<QuizDetailScreen> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
-                      "MEDIUM",
+                      widget.quizModel.level == 3
+                          ? "HARD"
+                          : widget.quizModel.level == 2
+                          ? "MID"
+                          : widget.quizModel.level == 1
+                          ? "EASY"
+                          : "EASY",
+                      // "MEDIUM",
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -51,7 +61,7 @@ class _QuizDetailScreenState extends State<QuizDetailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Incredible Kashmir",
+                    widget.quizModel.title,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -63,7 +73,7 @@ class _QuizDetailScreenState extends State<QuizDetailScreen> {
                       Icon(Icons.people, size: 25, color: Colors.white),
                       SizedBox(width: 10),
                       Text(
-                        "4,567 People Played This",
+                        "${widget.quizModel.playCount} People Played This",
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
@@ -82,7 +92,8 @@ class _QuizDetailScreenState extends State<QuizDetailScreen> {
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: NetworkImage(
-                          "https://images.unsplash.com/photo-1778918027232-ee2527f92946?w=1920&h=1080&fit=crop&q=80",
+                          // "https://images.unsplash.com/photo-1778918027232-ee2527f92946?w=1920&h=1080&fit=crop&q=80",
+                          widget.quizModel.coverImageUrl,
                         ),
                       ),
                     ),
@@ -134,7 +145,7 @@ class _QuizDetailScreenState extends State<QuizDetailScreen> {
                           ),
                           SizedBox(height: 2),
                           Text(
-                            "BDT 5000",
+                            "BDT ${widget.quizModel.entryFees}",
                             style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
@@ -146,21 +157,18 @@ class _QuizDetailScreenState extends State<QuizDetailScreen> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+                    widget.quizModel.description,
                     style: TextStyle(fontSize: 18),
                   ),
 
                   SizedBox(height: 15),
 
                   Wrap(
-                    children: [
-                      customChip(chipName: "Geography"),
-                      customChip(chipName: "Culture"),
-                      customChip(chipName: "Politics"),
-                      customChip(chipName: "Tourism"),
-                      customChip(chipName: "Bangladesh"),
-                    ],
+                    children: widget.quizModel.categories.map((item) {
+                      return customChip(chipName: item);
+                    }).toList(),
                   ),
+
                   SizedBox(height: 15),
                   Container(
                     // padding: EdgeInsets.symmetric(horizontal: 20),
@@ -199,12 +207,23 @@ class _QuizDetailScreenState extends State<QuizDetailScreen> {
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
                               return QuizeItem(
-                                title: "The Geek Coder",
-                                coverImgUrl: "https://images.unsplash.com/photo-1618477388954-7852f32655ec?w=1080&h=1920&fit=crop&q=80",
-                                entryFees: 3500,
-                                playCount: 3500,
-                                prizeMoney: 30000,
-                                level: 1,
+                                quizModel: QuizModel(
+                                  title: "The Geek Coder",
+                                  coverImageUrl: "https://images.unsplash.com/photo-1618477388954-7852f32655ec?w=1080&h=1920&fit=crop&q=80",
+                                  verticalThumbUrl: "https://images.unsplash.com/photo-1715457573748-8e8a70b2c1be?w=1920&h=1080&fit=crop&q=80",
+                                  entryFees: 3500,
+                                  playCount: 3500,
+                                  prizeMoney: 30000,
+                                  level: 1,
+                                  categories: [
+                                    "Geography",
+                                    "Culture",
+                                    "Politics",
+                                    "Tourism",
+                                    "Bangladesh",
+                                  ],
+                                  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+                                ),
                               );
                             },
                           ),
@@ -332,7 +351,20 @@ class _QuizDetailScreenState extends State<QuizDetailScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => QuizScreen()),
+                MaterialPageRoute(
+                  builder: (context) => QuizScreen(
+                    questionModel: Questionmodel(
+                      question: "What is the capital of Bangladesh?",
+                      option1: "Chittagong",
+                      option2: "Dhaka",
+                      option3: "Sylhet",
+                      option4: "Barisal",
+                      correctOpt: "2",
+                      questionImageUrl: widget.quizModel.coverImageUrl,
+                      questionMoney: 30_000,
+                    ),
+                  ),
+                ),
               );
             },
             child: Text(

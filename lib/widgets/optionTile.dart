@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizbit/features/quiz/questionModel.dart';
 import 'package:quizbit/features/quizresult/quizresult_screen.dart';
 
 Widget optionTile({
@@ -12,7 +13,19 @@ Widget optionTile({
     onTap: () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => QuizResultScreen()),
+        MaterialPageRoute(
+          builder: (context) => QuizResultScreen(
+            questionmodel: Questionmodel(
+              question: "What is the capital of Bangladesh?",
+              option1: "Chittagong",
+              option2: "Dhaka",
+              option3: "Sylhet",
+              option4: "Barisal",
+              correctOpt: "2",
+              questionMoney: 30_000,
+            ),
+          ),
+        ),
       );
     },
     child: Container(

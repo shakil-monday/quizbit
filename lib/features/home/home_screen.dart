@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:quizbit/features/quizdetail/quizdetail_screen.dart';
+import 'package:quizbit/model/quizModel.dart';
 import 'package:quizbit/widgets/custom_slidershow.dart';
 import 'package:quizbit/widgets/quiz_item.dart';
 
@@ -11,6 +13,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  QuizModel lastestQuizModel = QuizModel(
+    title: "Gurat Tourism",
+    coverImageUrl: "https://media.istockphoto.com/id/621720754/photo/jain-temples-on-top-of-shatrunjaya-hill.jpg?s=612x612&w=0&k=20&c=xXsrlNGzjkFRbkapnM-1I84mBnN4_6sjZQsf63u9lrE=",
+    verticalThumbUrl: "https://t4.ftcdn.net/jpg/04/57/13/89/360_F_457138917_CMIfwv6U785yncAzsJ9sgUKypWyFxE64.jpg",
+    entryFees: 25000,
+    level: 3,
+    playCount: 10000,
+    prizeMoney: 9483,
+    categories: ["Gujrat", "History"],
+    description: "If the error still appears after that, stop the app and run it again. As a general rule, hot restart after you change a constructor, add or remove fields, or change main() or any initState. Hot reload only reliably handles changes inside build methods.",
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,12 +128,23 @@ class _HomeScreenState extends State<HomeScreen> {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return QuizeItem(
-                          title: "Dhaka",
-                          coverImgUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=700&h=700&fit=crop",
-                          entryFees: 4000,
-                          playCount: 4000,
-                          prizeMoney: 12000,
-                          level: 3,
+                          quizModel: QuizModel(
+                            title: "Dhaka",
+                            coverImageUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=700&h=700&fit=crop",
+                            verticalThumbUrl: "https://images.unsplash.com/photo-1715457573748-8e8a70b2c1be?w=1920&h=1080&fit=crop&q=80",
+                            entryFees: 4500,
+                            playCount: 4000,
+                            prizeMoney: 12000,
+                            level: 3,
+                            categories: [
+                              "Geography",
+                              "Culture",
+                              "Politics",
+                              "Tourism",
+                              "Bangladesh",
+                            ],
+                            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+                          ),
                         );
                       },
                     ),
@@ -167,7 +192,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         borderRadius: BorderRadius.circular(12),
                         image: DecorationImage(
                           image: NetworkImage(
-                            "https://images.unsplash.com/photo-1768147765107-5eef8e032a62?w=1920&h=1080&fit=crop&q=80",
+                            // "https://images.unsplash.com/photo-1768147765107-5eef8e032a62?w=1920&h=1080&fit=crop&q=80",
+                            lastestQuizModel.coverImageUrl,
                           ),
                           fit: BoxFit.cover,
                         ),
@@ -194,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    "Bangladesh's Heaven Sajek",
+                                    lastestQuizModel.title,
                                     style: TextStyle(
                                       fontSize: 24,
                                       fontWeight: FontWeight.bold,
@@ -205,7 +231,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 SizedBox(width: 11),
                                 ElevatedButton(
                                   onPressed: () {
-                                    print("Cliked on latest Quiz button");
+                                    // print("Cliked on latest Quiz button");
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => QuizDetailScreen(
+                                          quizModel: lastestQuizModel,
+                                        ),
+                                      ),
+                                    );
                                   },
                                   child: Text("PLAY"),
                                 ),
@@ -257,12 +291,23 @@ class _HomeScreenState extends State<HomeScreen> {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return QuizeItem(
-                          title: "The Geek Coder",
-                          coverImgUrl: "https://images.unsplash.com/photo-1618477388954-7852f32655ec?w=1080&h=1920&fit=crop&q=80",
-                          entryFees: 3500,
-                          playCount: 3500,
-                          prizeMoney: 30000,
-                          level: 1,
+                          quizModel: QuizModel(
+                            title: "The Geek Coder",
+                            coverImageUrl: "https://images.unsplash.com/photo-1618477388954-7852f32655ec?w=1080&h=1920&fit=crop&q=80",
+                            verticalThumbUrl: "https://images.unsplash.com/photo-1715457573748-8e8a70b2c1be?w=1920&h=1080&fit=crop&q=80",
+                            entryFees: 3500,
+                            playCount: 3500,
+                            prizeMoney: 30000,
+                            level: 1,
+                            categories: [
+                              "Geography",
+                              "Culture",
+                              "Politics",
+                              "Tourism",
+                              "Bangladesh",
+                            ],
+                            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+                          ),
                         );
                       },
                     ),
@@ -432,7 +477,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icon(Icons.wine_bar),
               ],
             ),
-            SizedBox(height: 20,)
+            SizedBox(height: 20),
           ],
         ),
       ),

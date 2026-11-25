@@ -1,29 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:quizbit/model/quizModel.dart';
 import 'package:quizbit/features/quizdetail/quizdetail_screen.dart';
 
 class QuizeItem extends StatelessWidget {
-  String coverImgUrl;
-  String title;
-  int entryFees;
-  int prizeMoney;
-  int playCount;
-  int level;
+  // String coverImgUrl;
+  // String title;
+  // int entryFees;
+  // int prizeMoney;
+  // int playCount;
+  // int level;
 
-  QuizeItem({
-    super.key,
-    required this.coverImgUrl,
-    required this.title,
-    required this.entryFees,
-    required this.prizeMoney,
-    required this.level,
-    required this.playCount,
-  });
+  QuizModel quizModel;
+
+  // QuizeItem({
+  //   super.key,
+  //   required this.coverImageUrl,
+  //   required this.title,
+  //   required this.entryFees,
+  //   required this.prizeMoney,
+  //   required this.level,
+  //   required this.playCount,
+  // });
+  QuizeItem({super.key, required this.quizModel});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>QuizDetailScreen()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => QuizDetailScreen(
+              quizModel: QuizModel(
+                title: "The Geek Coder",
+                coverImageUrl: "https://images.unsplash.com/photo-1618477388954-7852f32655ec?w=1080&h=1920&fit=crop&q=80",
+                verticalThumbUrl: "https://images.unsplash.com/photo-1715457573748-8e8a70b2c1be?w=1920&h=1080&fit=crop&q=80",
+                entryFees: 3500,
+                playCount: 3500,
+                prizeMoney: 30000,
+                level: 1,
+                categories: [
+                  "Geography",
+                  "Culture",
+                  "Politics",
+                  "Tourism",
+                  "Bangladesh",
+                ],
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+              ),
+            ),
+          ),
+        );
       },
       child: Container(
         width: 160,
@@ -31,7 +58,7 @@ class QuizeItem extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           image: DecorationImage(
-            image: NetworkImage(coverImgUrl),
+            image: NetworkImage(quizModel.verticalThumbUrl),
             fit: BoxFit.cover,
           ),
         ),
@@ -54,7 +81,7 @@ class QuizeItem extends StatelessWidget {
                     style: TextStyle(fontSize: 12, color: Colors.white),
                   ),
                   Text(
-                    "BDT. $entryFees",
+                    "BDT. ${quizModel.entryFees}",
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.white,
@@ -74,11 +101,11 @@ class QuizeItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  level == 3
+                  quizModel.level == 3
                       ? "HARD"
-                      : level == 2
+                      : quizModel.level == 2
                       ? "MID"
-                      : level == 1
+                      : quizModel.level == 1
                       ? "EASY"
                       : "EASY",
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
@@ -89,7 +116,7 @@ class QuizeItem extends StatelessWidget {
               bottom: 30,
               left: 12,
               child: Text(
-                title,
+                quizModel.title,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -108,7 +135,7 @@ class QuizeItem extends StatelessWidget {
                     children: [
                       Icon(Icons.emoji_events, size: 16, color: Colors.white),
                       Text(
-                        "BDT. $prizeMoney",
+                        "BDT. ${quizModel.prizeMoney}",
                         style: TextStyle(
                           fontSize: 13,
                           color: Colors.white,
@@ -121,7 +148,7 @@ class QuizeItem extends StatelessWidget {
                     children: [
                       Icon(Icons.people, size: 16, color: Colors.white),
                       Text(
-                        "$playCount",
+                        "${quizModel.playCount}",
                         style: TextStyle(
                           fontSize: 13,
                           color: Colors.white,

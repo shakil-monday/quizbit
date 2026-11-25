@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:quizbit/features/quiz/questionModel.dart';
+import 'package:quizbit/features/quiz/quiz_screen.dart';
 
 class QuizResultScreen extends StatefulWidget {
-  const QuizResultScreen({super.key});
+  Questionmodel questionmodel;
+  QuizResultScreen({super.key, required this.questionmodel});
 
   @override
   State<QuizResultScreen> createState() => _QuizResultScreenState();
@@ -65,7 +68,22 @@ class _QuizResultScreenState extends State<QuizResultScreen> {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
-              print("Click on submit Next button");
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => QuizScreen(
+                    questionModel: Questionmodel(
+                      question: "What is the capital of Bangladesh?",
+                      option1: "Chittagong",
+                      option2: "Dhaka",
+                      option3: "Sylhet",
+                      option4: "Barisal",
+                      correctOpt: "2",
+                      questionMoney: 30_000,
+                    ),
+                  ),
+                ),
+              );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.deepOrangeAccent,
